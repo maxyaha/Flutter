@@ -12,7 +12,6 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  administration: write   # Required for enablement: true
 
 jobs:
   # ── 1. Build ──────────────────────────────────────────────────────────────
@@ -41,8 +40,6 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
