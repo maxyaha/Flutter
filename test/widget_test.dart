@@ -1,9 +1,8 @@
-// This is a basic Flutter widget test.
+// Widget smoke test for flutter_app
 //
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// Verifies that the app can be built and renders without crashing.
+// Firebase is not initialized in tests, so we just verify
+// the app widget tree builds successfully.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/app.dart';
@@ -11,20 +10,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('App renders without crashing', (tester) async {
+    // Build our app wrapped in ProviderScope (required for Riverpod).
+    // Firebase is not initialized here — the app's auth state will
+    // remain in the loading/unauthenticated state, which is expected.
     await tester.pumpWidget(const ProviderScope(child: App()));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    // Allow initial frame to settle.
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify the Material widget tree renders correctly.
+    expect(find.byType(MaterialApp), findsOneWidget);
   });
 }

@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/src/common_widgets/responsive_scaffold.dart';
 import 'package:flutter_app/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:flutter_app/src/features/home/data/home_repository.dart';
+import 'package:flutter_app/src/features/home/presentation/screens/home_screen_mobile.dart';
+import 'package:flutter_app/src/features/home/presentation/screens/home_screen_web.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'home_screen_mobile.dart';
-import 'home_screen_web.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -34,7 +33,7 @@ class HomeScreen extends ConsumerWidget {
       loading: () => const Scaffold(
         body: Center(child: CircularProgressIndicator()),
       ),
-      error: (Object error, StackTrace stack) => Scaffold(
+      error: (error, stack) => Scaffold(
         body: Center(
           child: Text('Error loading home data: $error'),
         ),

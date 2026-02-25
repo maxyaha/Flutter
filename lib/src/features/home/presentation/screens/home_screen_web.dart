@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/core/extensions/build_context_x.dart';
 import 'package:flutter_app/src/features/auth/domain/entities/user_entity.dart';
-
-import '../../domain/home_model.dart';
+import 'package:flutter_app/src/features/home/domain/home_model.dart';
 
 class HomeScreenWeb extends StatelessWidget {
   const HomeScreenWeb({
-    super.key,
     required this.data,
+    super.key,
     this.user,
   });
 
@@ -19,9 +18,11 @@ class HomeScreenWeb extends StatelessWidget {
     return Center(
       child: Container(
         constraints: const BoxConstraints(maxWidth: 600),
-        padding: const EdgeInsets.all(32.0),
+        padding: const EdgeInsets.all(32),
         decoration: BoxDecoration(
-          color: context.colorScheme.surfaceContainerHighest.withOpacity(0.3),
+          color: context.colorScheme.surfaceContainerHighest.withValues(
+            alpha: 0.3,
+          ),
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
             color: context.colorScheme.outlineVariant,

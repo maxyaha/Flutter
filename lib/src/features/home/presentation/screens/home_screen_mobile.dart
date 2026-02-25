@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/core/extensions/build_context_x.dart';
 import 'package:flutter_app/src/features/auth/domain/entities/user_entity.dart';
-
-import '../../domain/home_model.dart';
+import 'package:flutter_app/src/features/home/domain/home_model.dart';
 
 class HomeScreenMobile extends StatelessWidget {
   const HomeScreenMobile({
-    super.key,
     required this.data,
+    super.key,
     this.user,
   });
 
@@ -18,7 +17,7 @@ class HomeScreenMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

@@ -3,10 +3,10 @@ import 'package:flutter_app/src/utils/breakpoints.dart';
 
 class ResponsiveScaffold extends StatelessWidget {
   const ResponsiveScaffold({
-    super.key,
     required this.mobileBody,
-    this.tabletBody,
     required this.desktopBody,
+    super.key,
+    this.tabletBody,
     this.appBar,
     this.drawer,
     this.bottomNavigationBar,
