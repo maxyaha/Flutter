@@ -102,7 +102,7 @@ flutter analyze
 
 ### Web (PWA)
 ```bash
-flutter build web --release --web-renderer canvaskit
+flutter build web --release
 ```
 
 ### Android
