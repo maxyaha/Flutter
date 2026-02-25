@@ -17,13 +17,20 @@ class HomeScreen extends ConsumerWidget {
     return homeDataAsync.when(
       data: (data) => ResponsiveScaffold(
         appBar: AppBar(
-          title: const Text('Home Dashboard'),
+          title: const Text('Home'),
           actions: [
-            IconButton(
-              icon: const Icon(Icons.logout),
-              tooltip: 'Sign out',
-              onPressed: () =>
-                  ref.read(authControllerProvider.notifier).signOut(),
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: IconButton(
+                icon: const Icon(Icons.logout_rounded),
+                tooltip: 'Sign out',
+                style: IconButton.styleFrom(
+                  backgroundColor: const Color(0xFFEDE7FF),
+                  foregroundColor: const Color(0xFF9C8EC1),
+                ),
+                onPressed: () =>
+                    ref.read(authControllerProvider.notifier).signOut(),
+              ),
             ),
           ],
         ),
@@ -31,7 +38,12 @@ class HomeScreen extends ConsumerWidget {
         desktopBody: HomeScreenWeb(data: data, user: user),
       ),
       loading: () => const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
+        body: Center(
+          child: CircularProgressIndicator(
+            color: Color(0xFF9C8EC1),
+            strokeWidth: 2,
+          ),
+        ),
       ),
       error: (error, stack) => Scaffold(
         body: Center(
