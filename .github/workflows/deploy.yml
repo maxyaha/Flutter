@@ -4,7 +4,6 @@ on:
   push:
     branches: [main]
 
-# Allow one concurrent deployment
 concurrency:
   group: pages
   cancel-in-progress: true
@@ -13,13 +12,12 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  administration: write   # Required for enablement: true
 
 jobs:
-  deploy:
-    name: Deploy Web
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  # ── 1. Build ──────────────────────────────────────────────────────────────
+  build:
+    name: Build Web
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,9 +36,8 @@ jobs:
         run: dart run build_runner build --delete-conflicting-outputs
 
       - name: Build Web (release)
-        # Set --base-href if your repo is served under a sub-path, e.g.
-        # --base-href /<repo-name>/
-        run: flutter build web --release
+        # If your repo is NOT served at the root, set --base-href /Flutter/
+        run: flutter build web --release --base-href /Flutter/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -52,6 +49,15 @@ jobs:
         with:
           path: build/web
 
+  # ── 2. Deploy ─────────────────────────────────────────────────────────────
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
